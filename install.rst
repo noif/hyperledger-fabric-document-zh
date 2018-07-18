@@ -1,14 +1,11 @@
 Install Samples, Binaries and Docker Images
 ===========================================
 
-While we work on developing real installers for the Hyperledger Fabric
-binaries, we provide a script that will download and install samples and
-binaries to your system. We think that you'll find the sample applications
-installed useful to learn more about the capabilities and operations of
-Hyperledger Fabric.
+在我们在Hyperledger Fabric上开发真正的应用程序时，我们提供了一个脚本，
+该脚本可以下载并安装 一些例子和 二进制文件 到您的系统。我们认为您会发现安装的示例应用程序对于
+了解更多信息有关Hyperledger Fabric的功能和操作方面非常有用。
 
-
-.. note:: If you are running on **Windows** you will want to make use of the
+.. 注意:: If you are running on **Windows** you will want to make use of the
 	  Docker Quickstart Terminal for the upcoming terminal commands.
           Please visit the :doc:`prereqs` if you haven't previously installed
           it.
@@ -26,9 +23,7 @@ Hyperledger Fabric.
           documentation for `shared drives <https://docs.docker.com/docker-for-windows/#shared-drives>`__
           and use a location under one of the shared drives.
 
-Determine a location on your machine where you want to place the `fabric-samples`
-repository and enter that directory in a terminal window. The
-command that follows will perform the following steps:
+确定一个你机子上要放置fabric-samples 源代码的文件夹，并在终端窗口中定位到该目录。下面的的命令将执行以下步骤：
 
 #. If needed, clone the `hyperledger/fabric-samples` repository
 #. Checkout the appropriate version tag
@@ -36,39 +31,28 @@ command that follows will perform the following steps:
    for the version specified into the root of the fabric-samples repository
 #. Download the Hyperledger Fabric docker images for the version specified
 
-Once you are ready, and in the directory into which you will install the
-Fabric Samples and binaries, go ahead and execute the following command:
+准备好后，在下载有Fabric Samples源代码的目录中，继续执行以下命令：
 
 .. code:: bash
 
   curl -sSL http://bit.ly/2ysbOFE | bash -s 1.2.0
 
-.. note:: If you want to download Fabric, Fabric-ca and thirdparty Docker images
-          you must pass the version identifier to the script.
+.. 注意:: 如果要下载Fabric，Fabric-ca和第三方Docker镜像，则必须提供版本标识符
 
 .. code:: bash
 
   curl -sSL http://bit.ly/2ysbOFE | bash -s <fabric> <fabric-ca> <thirdparty>
   curl -sSL http://bit.ly/2ysbOFE | bash -s 1.2.0 1.2.0 0.4.10
 
-.. note:: If you get an error running the above curl command, you may
-          have too old a version of curl that does not handle
-          redirects or an unsupported environment.
+.. note:: 如果运行上述curl命令时出错，则可能使用了不能处理重定向或不受支持的环境的旧版本curl
 
-	  Please visit the :doc:`prereqs` page for additional
-	  information on where to find the latest version of curl and
-	  get the right environment. Alternately, you can substitute
-	  the un-shortened URL:
-	  https://github.com/hyperledger/fabric/blob/master/scripts/bootstrap.sh
+    请访问 :doc:`prereqs` 页面，了解有关在何处查找最新版本curl并获取正确环境的其他信息。或者，
+    您可以替换成长URL：https://github.com/hyperledger/fabric/blob/master/scripts/bootstrap.sh
 
-.. note:: You can use the command above for any published version of Hyperledger
-          Fabric. Simply replace `1.2.0` with the version identifier
-          of the version you wish to install.
+.. note:: 您可以对任何已发布的Hyperledger Fabric版本使用上述命令。只需将1.2.0替换为您要安装的版本的版本标识符即可。
 
-The command above downloads and executes a bash script
-that will download and extract all of the platform-specific binaries you
-will need to set up your network and place them into the cloned repo you
-created above. It retrieves the following platform-specific binaries:
+上面的命令下载并执行一个bash脚本，该脚本将下载并提取设置网络所需的所有特定于平台的二进制文件，
+并将它们放入您在上面创建的文件夹中。它会生成特定于平台的二进制文件：
 
   * ``cryptogen``,
   * ``configtxgen``,
@@ -78,27 +62,21 @@ created above. It retrieves the following platform-specific binaries:
   * ``idemixgen``, and
   * ``fabric-ca-client``
 
-and places them in the ``bin`` sub-directory of the current working
-directory.
+并将它们放在bin当前工作目录的子目录中。
 
-You may want to add that to your PATH environment variable so that these
-can be picked up without fully qualifying the path to each binary. e.g.:
+您可能希望将其添加到PATH环境变量中，以便在不完全限定每个二进制文件的路径的情况下使用这些可执行命令。例如：
 
 .. code:: bash
 
   export PATH=<path to download location>/bin:$PATH
 
-Finally, the script will download the Hyperledger Fabric docker images from
-`Docker Hub <https://hub.docker.com/u/hyperledger/>`__ into
-your local Docker registry and tag them as 'latest'.
+最后，该脚本会将`Docker Hub <https://hub.docker.com/u/hyperledger/>`__ 中的Hyperledger Fabric docker images下载 
+到本地Docker images库中，并将其标记为“latest”。
 
-The script lists out the Docker images installed upon conclusion.
+该脚本在结束时会列出了安装的Docker镜像。
 
-Look at the names for each image; these are the components that will ultimately
-comprise our Hyperledger Fabric network.  You will also notice that you have
-two instances of the same image ID - one tagged as "amd64-1.x.x" and
-one tagged as "latest". Prior to 1.2.0, the image being downloaded was determined
-by ``uname -m`` and showed as "x86_64-1.x.x".
+查看每个图像的名称; 这些组件最终将构成我们的Hyperledger Fabric网络。 您还会注意到，您有两个具有相同图像ID的实例
+ - 一个标记为“amd64-1.x.x”，另一个标记为“latest”。 在1.2.0之前，下载的图像由 ``uname -m``  确定，并显示为“x86_64-1.x.x”。
 
 .. note:: On different architectures, the x86_64/amd64 would be replaced
           with the string identifying your architecture.
